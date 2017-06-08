@@ -19,7 +19,7 @@ import io.realm.RealmResults;
  * Created by server02 on 02/06/2017.
  */
 
-public class ItemFragment extends Fragment implements ItemAdapter.CrudItemClickListener {
+public class ItemFragment extends Fragment implements ItemAdapter.ItemClickListener {
     @Bind(R.id.crud_recycler_view) protected RealmRecyclerView rv;
     private Realm realm;
 

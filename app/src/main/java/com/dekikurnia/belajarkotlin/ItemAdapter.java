@@ -17,10 +17,10 @@ import io.realm.RealmViewHolder;
 
 public class ItemAdapter extends RealmBasedRecyclerViewAdapter<Item, ItemAdapter.ViewHolder> {
 
-    private CrudItemClickListener clickListener;
+    private ItemClickListener clickListener;
 
     public ItemAdapter(Context context, RealmResults<Item> realmResults, boolean automaticUpdate,
-                       boolean animateResults, CrudItemClickListener clickListener) {
+                       boolean animateResults, ItemClickListener clickListener) {
         super(context, realmResults, automaticUpdate, animateResults);
         this.clickListener = clickListener;
     }
@@ -39,9 +39,9 @@ public class ItemAdapter extends RealmBasedRecyclerViewAdapter<Item, ItemAdapter
 
     class ViewHolder extends RealmViewHolder implements View.OnClickListener {
         @Bind(R.id.crud_item_title) public TextView ItemTitle;
-        private CrudItemClickListener clickListener;
+        private ItemClickListener clickListener;
 
-        public ViewHolder(View itemView, CrudItemClickListener clickListener) {
+        public ViewHolder(View itemView, ItemClickListener clickListener) {
             super(itemView);
             this.clickListener = clickListener;
             ButterKnife.bind(this, itemView);
@@ -56,7 +56,7 @@ public class ItemAdapter extends RealmBasedRecyclerViewAdapter<Item, ItemAdapter
         }
     }
 
-    public interface CrudItemClickListener {
+    public interface ItemClickListener {
         void onItemClick(View caller, Item task);
     }
 }
