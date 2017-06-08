@@ -7,7 +7,7 @@ import io.realm.annotations.PrimaryKey;
  * Created by server02 on 02/06/2017.
  */
 
-public class Crud extends RealmObject {
+public class Item extends RealmObject {
     @PrimaryKey
     private String id;
     private String title;

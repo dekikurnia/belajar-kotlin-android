@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        CrudFragment fragment = CrudFragment.newInstance();
+        ItemFragment fragment = ItemFragment.newInstance();
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.content_main, fragment, fragment.getClass().getSimpleName())

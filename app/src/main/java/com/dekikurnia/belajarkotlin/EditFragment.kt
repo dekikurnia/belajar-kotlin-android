@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
-import com.dekikurnia.belajarkotlin.models.Crud
+import com.dekikurnia.belajarkotlin.models.Item
 import io.realm.Realm
 import org.jetbrains.anko.*
 import org.jetbrains.anko.support.v4.UI
@@ -19,16 +19,16 @@ import java.util.*
  */
 class EditFragment : Fragment() {
 
-    val CRUD_ID_KEY: String = "crud_id_key"
+    val Item_ID_KEY: String = "item_id_key"
 
     val realm: Realm = Realm.getDefaultInstance()
 
-    var crud: Crud? = null
+    var item: Item? = null
 
     companion object {
         fun newInstance(id: String): EditFragment {
             var args: Bundle = Bundle()
-            args.putString("crud_id_key", id)
+            args.putString("item_id_key", id)
             var editFragment: EditFragment = newInstance()
             editFragment.arguments = args
             return editFragment
@@ -64,14 +64,13 @@ class EditFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-
-        if(arguments != null && arguments.containsKey(CRUD_ID_KEY)) {
-            val crudId = arguments.getString(CRUD_ID_KEY)
-            crud = realm.where(Crud::class.java).equalTo("id", crudId).findFirst()
+        if(arguments != null && arguments.containsKey(Item_ID_KEY)) {
+            val ItemId = arguments.getString(Item_ID_KEY)
+            item = realm.where(Item::class.java).equalTo("id", ItemId).findFirst()
             val todoTitle = find<EditText>(R.id.crud_title)
-            todoTitle.setText(crud?.title)
+            todoTitle.setText(item?.title)
             val todoDesc = find<EditText>(R.id.crud_desc)
-            todoDesc.setText(crud?.description)
+            todoDesc.setText(item?.description)
             val add = find<Button>(R.id.crud_add)
             add.setText(R.string.save)
         }
@@ -94,8 +93,8 @@ class EditFragment : Fragment() {
         realm.beginTransaction()
 
         // Either update the edited object or create a new one.
-        var t = crud?: realm.createObject(Crud::class.java)
-        t.id = crud?.id?: UUID.randomUUID().toString()
+        var t = item?: realm.createObject(Item::class.java)
+        t.id = item?.id?: UUID.randomUUID().toString()
         t.title = title.text.toString()
         t.description = desc.text.toString()
         realm.commitTransaction()

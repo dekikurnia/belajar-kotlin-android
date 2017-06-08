@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.dekikurnia.belajarkotlin.models.Crud;
+import com.dekikurnia.belajarkotlin.models.Item;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -19,15 +19,15 @@ import io.realm.RealmResults;
  * Created by server02 on 02/06/2017.
  */
 
-public class CrudFragment extends Fragment implements CrudAdapter.CrudItemClickListener {
+public class ItemFragment extends Fragment implements ItemAdapter.CrudItemClickListener {
     @Bind(R.id.crud_recycler_view) protected RealmRecyclerView rv;
     private Realm realm;
 
-    public static CrudFragment newInstance() {
-        return new CrudFragment();
+    public static ItemFragment newInstance() {
+        return new ItemFragment();
     }
 
-    public CrudFragment() {
+    public ItemFragment() {
     }
 
     @Override
@@ -48,8 +48,8 @@ public class CrudFragment extends Fragment implements CrudAdapter.CrudItemClickL
     @Override
     public void onResume() {
         super.onResume();
-        RealmResults<Crud> todos = realm.where(Crud.class).findAll();
-        CrudAdapter adapter = new CrudAdapter(getActivity(), todos, true, true, this);
+        RealmResults<Item> todos = realm.where(Item.class).findAll();
+        ItemAdapter adapter = new ItemAdapter(getActivity(), todos, true, true, this);
         rv.setAdapter(adapter);
 
     }
@@ -61,7 +61,7 @@ public class CrudFragment extends Fragment implements CrudAdapter.CrudItemClickL
     }
 
     @Override
-    public void onCrudClick(View caller, Crud task) {
+    public void onItemClick(View caller, Item task) {
         ((MainActivity)getActivity()).hideFab();
         EditFragment editFragment = EditFragment.Companion.newInstance(task.getId());
         getActivity().getSupportFragmentManager()

@@ -4,9 +4,7 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
-import com.dekikurnia.belajarkotlin.models.Crud;
-
+import com.dekikurnia.belajarkotlin.models.Item;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import io.realm.RealmBasedRecyclerViewAdapter;
@@ -17,11 +15,11 @@ import io.realm.RealmViewHolder;
  * Created by server02 on 05/06/2017.
  */
 
-public class CrudAdapter extends RealmBasedRecyclerViewAdapter<Crud, CrudAdapter.ViewHolder> {
+public class ItemAdapter extends RealmBasedRecyclerViewAdapter<Item, ItemAdapter.ViewHolder> {
 
     private CrudItemClickListener clickListener;
 
-    public CrudAdapter(Context context, RealmResults<Crud> realmResults, boolean automaticUpdate,
+    public ItemAdapter(Context context, RealmResults<Item> realmResults, boolean automaticUpdate,
                        boolean animateResults, CrudItemClickListener clickListener) {
         super(context, realmResults, automaticUpdate, animateResults);
         this.clickListener = clickListener;
@@ -35,12 +33,12 @@ public class CrudAdapter extends RealmBasedRecyclerViewAdapter<Crud, CrudAdapter
 
     @Override
     public void onBindRealmViewHolder(ViewHolder viewHolder, int i) {
-        final Crud crud = realmResults.get(i);
-        viewHolder.crudTitle.setText(crud.getTitle());
+        final Item item = realmResults.get(i);
+        viewHolder.ItemTitle.setText(item.getTitle());
     }
 
     class ViewHolder extends RealmViewHolder implements View.OnClickListener {
-        @Bind(R.id.crud_item_title) public TextView crudTitle;
+        @Bind(R.id.crud_item_title) public TextView ItemTitle;
         private CrudItemClickListener clickListener;
 
         public ViewHolder(View itemView, CrudItemClickListener clickListener) {
@@ -53,12 +51,12 @@ public class CrudAdapter extends RealmBasedRecyclerViewAdapter<Crud, CrudAdapter
         @Override
         public void onClick(View v) {
             if(clickListener != null) {
-                clickListener.onCrudClick(v, realmResults.get(getAdapterPosition()));
+                clickListener.onItemClick(v, realmResults.get(getAdapterPosition()));
             }
         }
     }
 
     public interface CrudItemClickListener {
-        void onCrudClick(View caller, Crud task);
+        void onItemClick(View caller, Item task);
     }
 }
