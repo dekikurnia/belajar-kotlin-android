@@ -9,7 +9,7 @@
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
     android:paddingTop="16dp"
-    tools:context=".CrudFragment"
+    tools:context=".ItemFragment"
     tools:showIn="@layout/activity_main">
 
     <co.moonmonkeylabs.realmrecyclerview.RealmRecyclerView
